@@ -14,7 +14,30 @@
 */
 
 function calculateTotalSpentByCategory(transactions) {
-  return [];
+  let ans=[]
+  for (let i=0;i<transactions.length;i++){
+    let moveForward=true
+    ans.forEach((cat)=>{
+      if(cat.category===transactions[i].category){
+        cat.totalSpent=cat.totalSpent+transactions[i].price;
+        moveForward=false;
+      }
+    })
+    if(moveForward){
+      ans.push({'category':transactions[i].category,'totalSpent':transactions[i].price});
+    }
+  }
+  console.log(ans)
+  // ans=[{ 'category': 'Food', 'totalSpent': 10 }];
+  return ans;
 }
-
+calculateTotalSpentByCategory([
+  {
+    id: 1,
+    timestamp: 1656076800000,
+    price: 10,
+    category: 'Food',
+    itemName: 'Pizza',
+  },
+])
 module.exports = calculateTotalSpentByCategory;
